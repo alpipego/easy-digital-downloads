@@ -195,9 +195,6 @@ function edd_process_download() {
 		nocache_headers();
 		header("Robots: none");
 		header("Content-Type: " . $ctype . "");
-		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachment; filename=\"" . apply_filters( 'edd_requested_file_name', basename( $requested_file ), $args ) . "\"");
-		header("Content-Transfer-Encoding: binary");
 
 		// If the file isn't locally hosted, process the redirect
 		if ( filter_var( $requested_file, FILTER_VALIDATE_URL ) && ! edd_is_local_file( $requested_file ) ) {
@@ -254,6 +251,9 @@ function edd_process_download() {
 
 				// Set the file size header
 				header( "Content-Length: " . @filesize( $file_path ) );
+				header("Content-Description: File Transfer");
+				header("Content-Disposition: attachment; filename=\"" . apply_filters( 'edd_requested_file_name', basename( $requested_file ), $args ) . "\"");
+				header("Content-Transfer-Encoding: binary");
 
 				// Now deliver the file based on the kind of software the server is running / has enabled
 				if ( stristr( getenv( 'SERVER_SOFTWARE' ), 'lighttpd' ) ) {
