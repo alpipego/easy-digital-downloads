@@ -68,7 +68,7 @@ class EDD_Discount {
 	 *
 	 * @since 2.7
 	 * @access protected
-	 * @var mixed float|int
+	 * @var float|int
 	 */
 	protected $amount = null;
 
@@ -525,10 +525,13 @@ class EDD_Discount {
 	 * @since 2.7
 	 * @access private
 	 *
-	 * @return string Discount amount.
+	 * @return float|int Discount amount.
 	 */
 	private function setup_amount() {
 		$amount = $this->get_meta( 'amount', true );
+		if ( stripos( $amount, '%' ) === 0 ) {
+			$amount = (int) str_replace( '%', '', $amount );
+		}
 		return $amount;
 	}
 

@@ -259,7 +259,7 @@ jQuery(document).ready(function ($) {
 						if( price_mode != 'multi' ) {
 							parent_form.find('.edd_download_quantity_wrapper').slideUp();
 						}
-						$( '.edd_go_to_checkout', parent_form ).show().removeAttr( 'data-edd-loading' );
+						$( '.edd_go_to_checkout', parent_form ).show().addClass('is-visible').removeAttr( 'data-edd-loading' );
 					}
 
 					if( response != 'incart' ) {
